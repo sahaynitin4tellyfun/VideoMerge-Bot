@@ -97,9 +97,9 @@ async def videos_handler(bot: Client, m: Message):
                 FormtDB.update({m.from_user.id: media.file_name.rsplit(".", 1)[-1].lower()})
             await asyncio.sleep(Config.TIME_GAP)
             if len(QueueDB.get(m.from_user.id)) == Config.MAX_VIDEOS:
-                MessageText = "**Okay Sir, You can merge your videos using the below Merge Now Button!**\n\n**© Made by @AVBotz ❤️**"
+                MessageText = "**Okay, You can merge your videos using the below Merge Now Button!**\n\n**© Made by @AVBotz ❤️**"
             markup = await MakeButtons(bot, m, QueueDB)
-            await editable.edit(text="**Your Videos are Added to Queue!**")
+            await editable.edit(text="Your Videos are Added to Queue!")
             reply_ = await m.reply_text(
                 text=MessageText,
                 reply_markup=InlineKeyboardMarkup(markup),
@@ -126,8 +126,8 @@ async def photo_handler(bot: Client, m: Message):
         text="**🙋🏻‍♂️ Hey, Your Thumbnail is Saved Successfully!**",
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("Show Thumbnail", callback_data="showThumbnail")],
-                [InlineKeyboardButton("Delete Thumbnail", callback_data="deleteThumbnail")]
+                [InlineKeyboardButton("😋 Show Thumbnail", callback_data="showThumbnail")],
+                [InlineKeyboardButton("🗑️ Delete Thumbnail", callback_data="deleteThumbnail")]
             ]
         )
     )
@@ -369,7 +369,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 )
             )
         else:
-            await cb.answer("**No Thumbnail Found for you in Database!**")
+            await cb.answer("No Thumbnail Found for you in Database!")
     elif "deleteThumbnail" in cb.data:
         await db.set_thumbnail(cb.from_user.id, thumbnail=None)
         await cb.message.edit("**Thumbnail Deleted Successfully from Database!**")
