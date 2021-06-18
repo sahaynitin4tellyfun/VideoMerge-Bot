@@ -30,9 +30,8 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
                 ),
                 reply_markup=InlineKeyboardMarkup(
                     [
-                        [InlineKeyboardButton("Developer - @AbirHasan2005", url="https://t.me/AbirHasan2005")],
-                        [InlineKeyboardButton("Support Group", url="https://t.me/linux_repo"),
-                         InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates")]
+                        [InlineKeyboardButton("Developer 😴", url="https://t.me/Animesh941"),
+                         InlineKeyboardButton("Other Botz 🤖", url="https://t.me/AVBotz")]
                     ]
                 )
             )
@@ -45,15 +44,14 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
                 thumb=video_thumbnail,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "Uploading Video ...",
+                    "**Uploading Video...**",
                     cb.message,
                     c_time
                 ),
                 reply_markup=InlineKeyboardMarkup(
                     [
-                        [InlineKeyboardButton("Developer - @AbirHasan2005", url="https://t.me/AbirHasan2005")],
-                        [InlineKeyboardButton("Support Group", url="https://t.me/linux_repo"),
-                         InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates")]
+                        [InlineKeyboardButton("Developer 😴", url="https://t.me/Animesh941"),
+                         InlineKeyboardButton("Other Botz 🤖", url="https://t.me/AVBotz")]
                     ]
                 )
             )
@@ -65,8 +63,8 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
             quote=True
         )
     except Exception as err:
-        print(f"Failed to Upload Video!\nError: {err}")
+        print(f"**Failed to Upload Video!**\n**Error: {err}**")
         try:
-            await cb.message.edit(f"Failed to Upload Video!\n**Error:**\n`{err}`")
+            await cb.message.edit(f"**Failed to Upload Video!**\n**Error:**\n`{err}`")
         except:
             pass
