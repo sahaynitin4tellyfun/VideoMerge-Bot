@@ -7,9 +7,9 @@
         "merge",
         "bot"
     ],
-    "repository": "https://github.com/AbirHasan2005/VideoMerge-Bot",
-    "website": "https://telegram.dog/AbirHasan2005",
-    "success_url": "https://t.me/AH_VideoMergeBot",
+    "repository": "https://github.com/AVBotz-TG/VideoMerge-Bot",
+    "website": "https://telegram.dog/Animesh941",
+    "success_url": "https://t.me/VideoMergeAVBot",
     "env": {
         "API_ID": {
             "description": "Get this value from my.telegram.org or @TeleORG_Bot"
@@ -44,7 +44,7 @@
         },
         "MAX_VIDEOS": {
             "description": "Max Videos Allowed to Merge. Don't put more than 15.",
-            "value": "5"
+            "value": "10"
         },
         "SESSION_NAME": {
             "description": "Bot's Session Name."
