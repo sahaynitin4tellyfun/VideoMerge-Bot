@@ -24,7 +24,7 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
                 caption=(f"**File Name: {merged_vid_path.rsplit('/', 1)[-1]}\nDuration: {format_timespan(duration)} || Size : {humanbytes(file_size)}**\n\n{Config.CAPTION}"),
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "**📤 Uploading Video...**",
+                    "**📤 Uploading as Video...**",
                     cb.message,
                     c_time
                 ),
@@ -43,18 +43,14 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
                 thumb=video_thumbnail,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "**Uploading Video...**",
+                    "**📤 Uploading as Document...**",
                     cb.message,
                     c_time
                 ),
                 reply_markup=InlineKeyboardMarkup(
-
                     [[
-
                          InlineKeyboardButton("👀 More Amazing Botz 🤖", url="https://t.me/AVBotz/5")]
-
                     ]
-
                 )
             )
         await asyncio.sleep(Config.TIME_GAP)
