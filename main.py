@@ -67,25 +67,64 @@ ABOUT_BUTTONS = InlineKeyboardMarkup(
                  InlineKeyboardButton("⛔ Close", callback_data="close")]
             ]
         )
-
 @NubBot.on_message(filters.private & filters.command("start"))
-async def start_handler(bot: Client, m: Message):
+async def start_handler(bot: Client, m: Message, cb=False):
     await AddUserToDatabase(bot, m)
-    Fsub = await ForceSub(bot, m)
-    if Fsub == 400:
+    FSub = await ForceSub(bot, m)
+    if FSub == 400:
         return
-    await m.reply_text(
-        text=Config.START_TEXT,
-        disable_web_page_preview=True,
-        quote=True,
-        reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("⚙️ Configure Current Settings 🔓", callback_data="openSettings")],
-             [InlineKeyboardButton("ℹ️ Help", callback_data="help"),
-              InlineKeyboardButton("🤖 About", callback_data="about"), 
-              InlineKeyboardButton("⛔ Close", callback_data="close")], 
-             ]
-          )
+    if not cb:
+        send_msg = await m.reply_text("**👀 Processing......**", quote=True)    
+    await send_msg.edit(
+      text=f"{Config.START_TEXT}".format(m.from_user.mention), 
+      reply_markup=START_BUTTONS, 
+      disable_web_page_preview=True
        )
+    if cb:
+        return await m.message.edit(
+                 text=f"{Config.START_TEXT}".format(m.from_user.mention),
+                 reply_markup=START_BUTTONS,
+                 disable_web_page_preview=True
+                     )
+@NubBot.on_message(filters.private & filters.command("help"))
+async def help_handler(bot: Client, m: Message, cb=False):
+    await AddUserToDatabase(bot, m)
+    FSub = await ForceSub(bot, m)
+    if FSub == 400:
+        return
+    if not cb:
+        send_msg = await m.reply_text("**👀 Processing......**", quote=True)    
+    await send_msg.edit(
+      text=f"{Config.HELP_TEXT}".format(m.from_user.mention), 
+      reply_markup=HELP_BUTTONS, 
+      disable_web_page_preview=True
+       )
+    if cb:
+        return await m.message.edit(
+                 text=f"{Config.HELP_TEXT}".format(m.from_user.mention),
+                 reply_markup=HELP_BUTTONS,
+                 disable_web_page_preview=True
+                     )
+    
+@NubBot.on_message(filters.private & filters.command("about"))
+async def about_handler(bot: Client, m: Message, cb=False):
+    await AddUserToDatabase(bot, m)
+    FSub = await ForceSub(bot, m)
+    if FSub == 400:
+        return
+    if not cb:
+        send_msg = await m.reply_text("**👀 Processing......**", quote=True)    
+    await send_msg.edit(
+      text=f"{Config.ABOUT_TEXT}", 
+      reply_markup=ABOUT_BUTTONS, 
+      disable_web_page_preview=True
+       )
+    if cb:
+        return await m.message.edit(
+                 text=f"{Config.ABOUT_TEXT}",
+                 reply_markup=ABOUT_BUTTONS,
+                 disable_web_page_preview=True
+                     )
 
 @NubBot.on_message(filters.private & (filters.video | filters.document) & ~filters.edited)
 async def videos_handler(bot: Client, m: Message):
