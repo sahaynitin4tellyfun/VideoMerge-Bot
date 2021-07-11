@@ -148,8 +148,8 @@ async def videos_handler(bot: Client, m: Message):
     if isInGap is True:
         await m.reply_text(f"**🙄 I don't liked your flooding!**\n**Send next videos in {str(sleepTime)}seconds!! 😊**", quote=True)
     else:
-        editable = await m.reply_text("Please Wait ...", quote=True)
-        MessageText = "**Okay Sir, Your videos are accepted**\n**If you want to add more videos you can send next {OR} Press Merge Now Button!**"
+        editable = await m.reply_text("**👀 Processing...**", quote=True)
+        MessageText = "**If you want to add more videos you can send next {OR} Press Merge Now Button!**"
         if QueueDB.get(m.from_user.id, None) is None:
             QueueDB.update({m.from_user.id: []})
         if (len(QueueDB.get(m.from_user.id)) >= 0) and (len(QueueDB.get(m.from_user.id)) <= Config.MAX_VIDEOS):
@@ -162,7 +162,7 @@ async def videos_handler(bot: Client, m: Message):
             if len(QueueDB.get(m.from_user.id)) == Config.MAX_VIDEOS:
                 MessageText = "**Okay, You can merge your videos using the below Merge Now Button!**\n\n**© Made by @AVBotz ❤️**"
             markup = await MakeButtons(bot, m, QueueDB)
-            await editable.edit(text="Your Videos are Added to Queue!")
+            await editable.edit(text="**Your Videos are Added to Queue!**")
             reply_ = await m.reply_text(
                 text=MessageText,
                 reply_markup=InlineKeyboardMarkup(markup),
@@ -211,7 +211,7 @@ async def settings_handler(bot: Client, m: Message):
     Fsub = await ForceSub(bot, m)
     if Fsub == 400:
         return
-    editable = await m.reply_text("**Please Wait for a sec...**", quote=True)
+    editable = await m.reply_text("**👀 Processing....**", quote=True)
     await OpenSettings(editable, m.from_user.id)
 
 
@@ -260,17 +260,17 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
     if "mergeNow" in cb.data:
         vid_list = list()
         await cb.message.edit(
-            text="**Please Wait for a sec...**"
+            text="**👀 Processing...**"
         )
         duration = 0
         list_message_ids = QueueDB.get(cb.from_user.id, None)
         input_ = f"{Config.DOWN_PATH}/{cb.from_user.id}/input.txt"
         if list_message_ids is None:
-            await cb.answer("**🗑️ Queue Empty!**", show_alert=True)
+            await cb.answer("🗑️ Queue Empty!", show_alert=True)
             await cb.message.delete(True)
             return
         if len(list_message_ids) < 2:
-            await cb.answer("**You have sent only 1 video, Send another one 🙄!**", show_alert=True)
+            await cb.answer("You have sent only 1 video, Send another one 🙄!", show_alert=True)
             await cb.message.delete(True)
             return
         if not os.path.exists(f"{Config.DOWN_PATH}/{cb.from_user.id}/"):
@@ -447,7 +447,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
     elif "showThumbnail" in cb.data:
         db_thumbnail = await db.get_thumbnail(cb.from_user.id)
         if db_thumbnail is not None:
-            await cb.answer("**Sending Thumbnail...**", show_alert=True)
+            await cb.answer("Trying to send your Custom Thumbnail...", show_alert=True)
             await bot.send_photo(
                 chat_id=cb.message.chat.id,
                 photo=db_thumbnail,
