@@ -21,17 +21,16 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
                 height=height,
                 duration=duration,
                 thumb=video_thumbnail,
-                caption=Config.CAPTION.format((await bot.get_me()).username) + f"\n\n**File Name:** `{merged_vid_path.rsplit('/', 1)[-1]}`\n**Duration:** `{format_timespan(duration)}`\n**File Size:** `{humanbytes(file_size)}`",
+                caption=(f"**File Name: {merged_vid_path.rsplit('/', 1)[-1]}\nDuration: {format_timespan(duration)} || Size : {humanbytes(file_size)}**\n\n{Config.CAPTION}"),
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "Uploading Video ...",
+                    "**📤 Uploading Video...**",
                     cb.message,
                     c_time
                 ),
                 reply_markup=InlineKeyboardMarkup(
-                    [
-                        [InlineKeyboardButton("Developer 😴", url="https://t.me/Animesh941"),
-                         InlineKeyboardButton("Other Botz 🤖", url="https://t.me/AVBotz")]
+                    [[
+                         InlineKeyboardButton("👀 More Amazing Botz 🤖", url="https://t.me/AVBotz/5")]
                     ]
                 )
             )
@@ -40,7 +39,7 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
             sent_ = await bot.send_document(
                 chat_id=cb.message.chat.id,
                 document=merged_vid_path,
-                caption=Config.CAPTION.format((await bot.get_me()).username) + f"\n\n**File Name:** `{merged_vid_path.rsplit('/', 1)[-1]}`\n**Duration:** `{format_timespan(duration)}`\n**File Size:** `{humanbytes(file_size)}`",
+                caption=(f"**File Name: {merged_vid_path.rsplit('/', 1)[-1]}\nDuration: {format_timespan(duration)} || Size : {humanbytes(file_size)}**\n\n{Config.CAPTION}"),
                 thumb=video_thumbnail,
                 progress=progress_for_pyrogram,
                 progress_args=(
@@ -49,10 +48,13 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
                     c_time
                 ),
                 reply_markup=InlineKeyboardMarkup(
-                    [
-                        [InlineKeyboardButton("Developer 😴", url="https://t.me/Animesh941"),
-                         InlineKeyboardButton("Other Botz 🤖", url="https://t.me/AVBotz")]
+
+                    [[
+
+                         InlineKeyboardButton("👀 More Amazing Botz 🤖", url="https://t.me/AVBotz/5")]
+
                     ]
+
                 )
             )
         await asyncio.sleep(Config.TIME_GAP)
