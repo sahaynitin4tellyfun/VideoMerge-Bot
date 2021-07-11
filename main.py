@@ -358,6 +358,23 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 ]
             )
         )
+    elif "close" in cb.data:
+        await cb.message.delete(True) 
+    elif "help" in cb.data:
+        await cb.edit_message_text(
+              text = f"{Config.HELP_TEXT}".format(cb.from_user.mention),
+              disable_web_page_preview = True,
+              reply_markup = HELP_BUTTONS)
+    elif "home" in cb.data:
+        await cb.edit_message_text(
+              text = f"{Config.START_TEXT}".format(cb.from_user.mention),
+              disable_web_page_preview = True,
+              reply_markup = START_BUTTONS)
+    elif "about" in cb.data:
+        await cb.edit_message_text(
+              text = f"{Config.ABOUT_TEXT}",
+              disable_web_page_preview = True,
+              reply_markup = ABOUT_BUTTONS)
     elif "cancelProcess" in cb.data:
         await cb.message.edit("**Trying to Delete all the progressed work ⚒**")
         await delete_all(root=f"{Config.DOWN_PATH}/{cb.from_user.id}/")
