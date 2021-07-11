@@ -491,6 +491,9 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             )
         else:
             await cb.answer("**Sorry, Your Queue is Empty!**", show_alert=True)
+    elif "renamefile" in cb.data:
+        await cb.message.edit("**Okay,**\n**Send me new file name!**")
+            try:
     elif "triggerGenSS" in cb.data:
         generate_ss = await db.get_generate_ss(cb.from_user.id)
         if generate_ss is True:
