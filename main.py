@@ -50,7 +50,6 @@ START_BUTTONS = InlineKeyboardMarkup(
               InlineKeyboardButton("⛔ Close", callback_data="close")], 
              ]
           )
-       )
 
 HELP_BUTTONS = InlineKeyboardMarkup(
             [
