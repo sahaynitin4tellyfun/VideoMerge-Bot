@@ -20,12 +20,15 @@ class Config(object):
     BOT_OWNER = int(os.environ.get("BOT_OWNER", 1445283714))
 
     START_TEXT = """
-**Hii, I'm a Simple Video Merge Bot!**
-**I can Merge Multiple Videos into One Video. Video Formats should be same for all the videos.**
+**Hello {}, I'm a Simple Video Merger Bot!
+I can Merge Multiple Videos into One Video, Generate ScreenShots, Generate Sample Video and many extra features....!
 
-**Made by @AniMesH941**
+Configure The Settings Before using meh...!
+Check Below Buttons for more..! 
+
+🤖 Developer : [Animesh Verma](https://t.me/Animesh941)**
 """
-    CAPTION = "**Video Merged by @{}**\n\n**Made by @AniMesH941**"
+    CAPTION = "**__© Merged By @AVBotz ❤️__**"
     PROGRESS = """
 **Percentage : {0}%**
 **Done: {1}**
