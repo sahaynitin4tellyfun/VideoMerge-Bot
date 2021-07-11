@@ -28,6 +28,34 @@ Check Below Buttons for more..!
 
 🤖 Developer : [Animesh Verma](https://t.me/Animesh941)**
 """
+    ABOUT_TEXT = """
+**● Developed By : [This Person](https://t.me/Animesh941)
+● Updates Channel : [A𝕍Botz](https://t.me/AVBotz)
+● Support : [A𝕍Botz Support](https://t.me/AVBotz_Support)
+● Language : [Python 3](https://www.python.org)
+● Library : [Pyrogram](https://docs.pyrogram.org)
+● Server : [Heroku](https://heroku.com)
+
+©️ Made By @AVBotz ❤️**
+"""
+
+    HELP_TEXT = """**Hello {}, It's too easy to use me..**
+ 
+**● Configure the Settings before using me... 
+● Send a photo to set it as your custom thumbnail...
+● Send any File or media you want to rename... 
+● That's it, and rest is mine work... 
+
+📝 Available Commands... 
+- /start - Start the Bot
+- /help - This Message
+- /about - About Meh
+- /settings - Configure Settings 
+- /showthumb & /deletethumb - For Thumbnail
+
+© By @AVBotz ❤️**
+"""
+    
     CAPTION = "**__© Merged By @AVBotz ❤️__**"
     PROGRESS = """
 **Percentage : {0}%**
