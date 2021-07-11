@@ -112,7 +112,16 @@ async def videos_handler(bot: Client, m: Message):
                 text=f"**😂😂 Stop it dude,**\n**Only {str(Config.MAX_VIDEOS)} videos are allowed to merge together!**\n\n**So, Click Merge Now Button 😐**",
                 reply_markup=InlineKeyboardMarkup(markup)
             )
-
+@NubBot.pn_message(filters.private & filters.media & ~filters.edited)
+async def video_hand(bot: Client, m: Message):
+    await bot.send_message(
+        text=f"**I can't identify it's file name... Please Rename it or send videos in file format!**", 
+        reply_markup=InlineKeyboardMarkup(
+                [
+                    [InlineKeyboardButton("📂 Rename This File", callback_data="renameFile_Yes")]
+               ]
+           )
+       )
 
 @NubBot.on_message(filters.private & filters.photo & ~filters.edited)
 async def photo_handler(bot: Client, m: Message):
@@ -369,10 +378,10 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 )
             )
         else:
-            await cb.answer("No Thumbnail Found for you in Database!")
+            await cb.answer("**😐 No Thumbnail Found for you in Database!**")
     elif "deleteThumbnail" in cb.data:
         await db.set_thumbnail(cb.from_user.id, thumbnail=None)
-        await cb.message.edit("**Thumbnail Deleted Successfully from Database!**")
+        await cb.message.edit("**✅ Thumbnail Deleted Successfully from Database!**")
     elif "triggerUploadMode" in cb.data:
         upload_as_doc = await db.get_upload_as_doc(cb.from_user.id)
         if upload_as_doc is False:
