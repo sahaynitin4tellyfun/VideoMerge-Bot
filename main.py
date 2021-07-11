@@ -55,10 +55,11 @@ async def start_handler(bot: Client, m: Message):
         disable_web_page_preview=True,
         quote=True,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Developer 😴", url="https://t.me/Animesh941"),
-              InlineKeyboardButton("Other Botz 🤖", url="https://t.me/AVBotz")],
-             [InlineKeyboardButton("🔒 Change Current Settings ⚙", callback_data="openSettings")]
-            ]
+            [[InlineKeyboardButton("⚙️ Configure Current Settings 🔓", callback_data="openSettings")],
+             [InlineKeyboardButton("ℹ️ Help", callback_data="help"),
+              InlineKeyboardButton("🤖 About", callback_data="about"), 
+              InlineKeyboardButton("⛔ Close", callback_data="close")], 
+             ]
           )
        )
 
@@ -114,7 +115,7 @@ async def videos_handler(bot: Client, m: Message):
             )
 @NubBot.on_message(filters.private & filters.media & ~filters.edited)
 async def video_hand(bot: Client, m: Message):
-    await bot.send_message(
+    await m.reply_text(
         text=f"**I can't identify it's file name... Please Rename it or send videos in file format!**", 
         reply_markup=InlineKeyboardMarkup(
                 [
