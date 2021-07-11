@@ -12,11 +12,11 @@ async def OpenSettings(m: Message, user_id: int):
             text="**Here You Can Change or Configure Your Settings:**",
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton(f"Upload as {'Video' if (await db.get_upload_as_doc(id=user_id)) is False else 'Document'} ✅", callback_data="triggerUploadMode")],
-                    [InlineKeyboardButton(f"Generate Sample Video {'✅' if (await db.get_generate_sample_video(id=user_id)) is True else '❌'}", callback_data="triggerGenSample")],
-                    [InlineKeyboardButton(f"Generate Screenshots {'✅' if (await db.get_generate_ss(id=user_id)) is True else '❌'}", callback_data="triggerGenSS")],
-                    [InlineKeyboardButton("Show Thumbnail", callback_data="showThumbnail")],
-                    [InlineKeyboardButton("Show Queue Files", callback_data="showQueueFiles")]
+                    [InlineKeyboardButton(f"📤 Upload as {'Video' if (await db.get_upload_as_doc(id=user_id)) is False else 'Document'} ✅", callback_data="triggerUploadMode")],
+                    [InlineKeyboardButton(f"🎞️ Generate Sample Video {'✅' if (await db.get_generate_sample_video(id=user_id)) is True else '❌'}", callback_data="triggerGenSample")],
+                    [InlineKeyboardButton(f"📸 Generate Screenshots {'✅' if (await db.get_generate_ss(id=user_id)) is True else '❌'}", callback_data="triggerGenSS")],
+                    [InlineKeyboardButton("🖼️ Show Custom Thumbnail 👀", callback_data="showThumbnail")],
+                    [InlineKeyboardButton("⛔ Close Settings ⛔", callback_data="close")]
                 ]
             )
         )
