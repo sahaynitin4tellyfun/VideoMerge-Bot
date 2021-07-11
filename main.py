@@ -43,6 +43,30 @@ NubBot = Client(
     bot_token=Config.BOT_TOKEN
 )
 
+START_BUTTONS = InlineKeyboardMarkup(
+            [[InlineKeyboardButton("⚙️ Configure Current Settings 🔓", callback_data="openSettings")],
+             [InlineKeyboardButton("ℹ️ Help", callback_data="help"),
+              InlineKeyboardButton("🤖 About", callback_data="about"), 
+              InlineKeyboardButton("⛔ Close", callback_data="close")], 
+             ]
+          )
+       )
+
+HELP_BUTTONS = InlineKeyboardMarkup(
+            [
+                [InlineKeyboardButton("🏡 Home", callback_data="home"),
+                 InlineKeyboardButton("🤖 About", callback_data="about"),
+                 InlineKeyboardButton("⛔ Close", callback_data="close")]
+            ]
+        )
+
+ABOUT_BUTTONS = InlineKeyboardMarkup(
+            [
+                [InlineKeyboardButton("📮 Feedback DeV", url="https://t.me/Animesh941")],
+                [InlineKeyboardButton("🏡 Home", callback_data="home"),
+                 InlineKeyboardButton("⛔ Close", callback_data="close")]
+            ]
+        )
 
 @NubBot.on_message(filters.private & filters.command("start"))
 async def start_handler(bot: Client, m: Message):
