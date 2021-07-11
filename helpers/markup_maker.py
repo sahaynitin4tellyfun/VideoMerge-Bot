@@ -11,7 +11,6 @@ async def MakeButtons(bot: Client, m: Message, db: dict):
         if media is None:
             continue
         else:
-            markup.append([InlineKeyboardButton(f"1) {media.file_name}", callback_data=f"showFileName_{str(i.message_id)}")])
-    markup.append([InlineKeyboardButton("🔀 Merge Now", callback_data="mergeNow")])
-    markup.append([InlineKeyboardButton("🗑️ Clear Files", callback_data="cancelProcess")])
+            markup.append([InlineKeyboardButton(f"● {media.file_name}", callback_data=f"showFileName_{str(i.message_id)}")])
+    markup.append([InlineKeyboardButton("🔀 Merge Now", callback_data="mergeNow")],[InlineKeyboardButton("🗑️ Clear Files", callback_data="cancelProcess")])
     return markup
