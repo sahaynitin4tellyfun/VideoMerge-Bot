@@ -521,9 +521,9 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                               file_path=new_file_name,
                               file_size=media.file_size
                             )
-        except TimeoutError:
-            await cb.message.edit("**Time Up! You didn't renamed your file\nNow Use @RenamerAVBot to rename 😏**")
-            await asyncio.sleep(2)
+                    except TimeoutError:
+                        await cb.message.edit("**Time Up! You didn't renamed your file\nNow Use @RenamerAVBot to rename 😏**")
+                        await asyncio.sleep(2)
     elif "triggerGenSS" in cb.data:
         generate_ss = await db.get_generate_ss(cb.from_user.id)
         if generate_ss is True:
