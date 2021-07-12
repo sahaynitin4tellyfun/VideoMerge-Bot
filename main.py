@@ -391,7 +391,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                     [
                         [InlineKeyboardButton("🗑️ Remove File", callback_data=f"removeFile_{str(message_.message_id)}"), 
                          InlineKeyboardButton("⛔ Close", callback_data=f"close")
-                    ]
+                        ]
+                    ] 
                 )
             )
         except FloodWait as e:
@@ -496,11 +497,14 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await cb.message.edit(
             text="**Rename Your Files Using Rename Bots and try sending again, Only mp4, mkv, webm formats are accepted!\n\n👀 Suggested : @RenamerAVBot | .mkv Format**", 
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("👀 Other Botz", url="https://t.me/AVBotz/5"),
-                  InlineKeyboardButton("😐 Close", callback_data="close")
-                 ]] 
-               ) 
-             ) 
+                [
+                    [
+                        InlineKeyboardButton("👀 Other Botz", url="https://t.me/AVBotz/5"),
+                        InlineKeyboardButton("😐 Close", callback_data="close")
+                    ]
+                ] 
+            ) 
+         ) 
     elif "triggerGenSS" in cb.data:
         generate_ss = await db.get_generate_ss(cb.from_user.id)
         if generate_ss is True:
