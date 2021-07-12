@@ -497,7 +497,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             ask_: Message = await bot.listen(cb.message.chat.id, timeout=300)
             if ask_.text:
                 ascii_ = e = ''.join([i if (i in string.digits or i in string.ascii_letters or i == " ") else "" for i in ask_.text])
-                new_file_name = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/{ascii_.replace(' ', '_').rsplit('.', 1)[0]}.{FormtDB.get(cb.from_user.id).lower()}"
+                new_file_name = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/{ascii_.replace(' ', '_')}"
                 await cb.message.edit(f"**Renaming your file to** `{new_file_name.rsplit('/', 1)[-1]}`")
                 os.rename(file_path, new_file_name)
                 await asyncio.sleep(2)
