@@ -389,7 +389,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 reply_to_message_id=message_.message_id,
                 reply_markup=InlineKeyboardMarkup(
                     [
-                        [InlineKeyboardButton("⛔ Remove File", callback_data=f"removeFile_{str(message_.message_id)}")]
+                        [InlineKeyboardButton("🗑️ Remove File", callback_data=f"removeFile_{str(message_.message_id)}"), 
+                         InlineKeyboardButton("⛔ Close", callback_data=f"close")
                     ]
                 )
             )
@@ -439,9 +440,9 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 )
                 return
         await cb.message.edit(
-            text=Config.START_TEXT,
+            text=Config.START_TEXT.format(cb.from_user.mention),
             parse_mode="Markdown",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Developer 😴", url="https://t.me/Animesh941"), InlineKeyboardButton("Other Botz 🤖", url="https://t.me/AVBotz")]]),
+            reply_markup=START_BUTTONS,
             disable_web_page_preview=True
         )
     elif "showThumbnail" in cb.data:
@@ -492,19 +493,14 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         else:
             await cb.answer("**Sorry, Your Queue is Empty!**", show_alert=True)
     elif "renamefile" in cb.data:
-        await cb.message.edit("**Okay,**\n**Send me new file name!**")
-        try:
-            ask_: Message = await bot.listen(cb.message.chat.id, timeout=300)
-            if ask_.text:
-                ascii_ = e = ''.join([i if (i in string.digits or i in string.ascii_letters or i == " ") else "" for i in ask_.text])
-                new_file_name = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/{ascii_.replace(' ', '_')}"
-                await cb.message.edit(f"**Renaming your file to** `{new_file_name.rsplit('/', 1)[-1]}`")
-                os.rename(file_path, new_file_name)
-                await asyncio.sleep(2)
-                file_path = new_file_name
-        except TimeoutError:
-            await cb.message.edit("**Time Up!**\n**You didn't renamed your file, So uploading file with default name.**")
-            await asyncio.sleep(Config.TIME_GAP)
+        await cb.message.edit(
+            text="**Rename Your Files Using Rename Bots and try sending again, Only mp4, mkv, webm formats are accepted!\n\n👀 Suggested : @RenamerAVBot | .mkv Format**", 
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("👀 Other Botz", url="https://t.me/AVBotz/5"),
+                  InlineKeyboardButton("😐 Close", callback_data="close")
+                 ]] 
+               ) 
+             ) 
     elif "triggerGenSS" in cb.data:
         generate_ss = await db.get_generate_ss(cb.from_user.id)
         if generate_ss is True:
