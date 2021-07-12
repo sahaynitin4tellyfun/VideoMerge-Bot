@@ -502,28 +502,27 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 await reply_.edit("**📥 Trying to Download...**")
                 await asyncio.sleep(2)
                 c_time = time.time()
-                try:
-                    await bot.download_media(
-                        message=cb,
-                        file_name=new_file_name,
-                        progress=progress_for_pyrogram,
-                        progress_args=(
-                            "**Downloading... 😴**",
-                            reply_,
-                            c_time
-                        )
-                    )
-                    await asyncio.sleep(2)
-                    await reply_.edit("**📤 Trying to Upload...**")
-                    await UploadFile(
-                              bot,
-                              reply_,
-                              file_path=new_file_name,
-                              file_size=media.file_size
-                            )
-                    except TimeoutError:
-                        await cb.message.edit("**Time Up! You didn't renamed your file\nNow Use @RenamerAVBot to rename 😏**")
-                        await asyncio.sleep(2)
+                await bot.download_media(
+                    message=cb,
+                    file_name=new_file_name,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        "**Downloading... 😴**",
+                        reply_,
+                        c_time
+                      )
+                   )
+                await asyncio.sleep(2)
+                await reply_.edit("**📤 Trying to Upload...**")
+                await UploadFile(
+                    bot,
+                    reply_,
+                    file_path=new_file_name,
+                    file_size=media.file_size
+                )
+        except TimeoutError:
+            await cb.message.edit("**Time Up! You didn't renamed your file\nNow Use @RenamerAVBot to rename 😏**")
+            await asyncio.sleep(2)
     elif "triggerGenSS" in cb.data:
         generate_ss = await db.get_generate_ss(cb.from_user.id)
         if generate_ss is True:
@@ -625,7 +624,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             video_thumbnail=video_thumbnail,
             file_size=os.path.getsize(merged_vid_path)
         )
-        caption = f"© @{(await bot.get_me()).username}"
+        caption = f"**__© Uploaded By @AVBotz ❤️__**"
         if (await db.get_generate_ss(cb.from_user.id)) is True:
             await cb.message.edit("**Now Generating Screenshots...**")
             generate_ss_dir = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}"
