@@ -485,7 +485,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 text="**File removed from queue!**",
                 reply_markup=InlineKeyboardMarkup(
                     [
-                        [InlineKeyboardButton("🔙 Go Back", callback_data="openSettings")]
+                        [InlineKeyboardButton("🔙 Go Back", callback_data="close")]
                     ]
                 )
             )
@@ -494,16 +494,36 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
     elif "renamefile" in cb.data:
         await cb.message.edit("**Okay,**\n**Send me new file name!**")
         try:
-           ask_: Message = await bot.listen(cb.message.chat.id, timeout=300)
-           if ask_.text:
-               ascii_ = e = ''.join([i if (i in string.digits or i in string.ascii_letters or i == " ") else "" for i in ask_.text])
-               new_file_name = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/{ascii_.replace(' ', '_').rsplit('.', 1)[0]}.{FormtDB.get(cb.from_user.id).lower()}"
-               await cb.message.edit(f"**Renaming your file to : {new_file_name.rsplit('/', 1)[-1]}**")
-               os.rename(new_file_name)
-               await asyncio.sleep(2)
+            ask_: Message = await bot.listen(cb.message.chat.id, timeout=300)
+            if ask_.text:
+                ascii_ = ''.join([i if (i in string.digits or i in string.ascii_letters or i == " ") else "" for i in ask_.text.rsplit('.', 1)[0]])
+                new_file_name = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/{ascii_.replace(' ', '_').rsplit('.', 1)[0]}.{FormtDB.get(cb.from_user.id).lower()}"
+                await cb.message.edit(f"**Renaming your file to : {new_file_name.rsplit('/', 1)[-1]}**")
+                await reply_.edit("**📥 Trying to Download...**")
+                await asyncio.sleep(2)
+                c_time = time.time()
+                try:
+                    await bot.download_media(
+                        message=cb,
+                        file_name=new_file_name,
+                        progress=progress_for_pyrogram,
+                        progress_args=(
+                            "**Downloading... 😴**",
+                            reply_,
+                            c_time
+                        )
+                    )
+                    await asyncio.sleep(2)
+                    await reply_.edit("**📤 Trying to Upload...**")
+                    await UploadFile(
+                              bot,
+                              reply_,
+                              file_path=new_file_name,
+                              file_size=media.file_size
+                            )
         except TimeoutError:
             await cb.message.edit("**Time Up! You didn't renamed your file\nNow Use @RenamerAVBot to rename 😏**")
-            await asyncio.sleep(Config.TIME_GAP)
+            await asyncio.sleep(2)
     elif "triggerGenSS" in cb.data:
         generate_ss = await db.get_generate_ss(cb.from_user.id)
         if generate_ss is True:
