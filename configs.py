@@ -43,11 +43,12 @@ Check Below Buttons for more..!
  
 **● Configure the Settings before using me... 
 ● Send a photo to set it as your custom thumbnail...
-● Send videos to merge accordingly... 
-  - Atleast 2 Videos to be sent to merge
+● Send videos to merge accordingly...**
+  __- Atleast 2 Videos to be sent to merge
   - The video formats should be mp4, mkv or WebM
-  - The videos should have proper file name
-● If you are done with sending medias, Click "🔀 Merge Now" to merge
+  - The videos should have proper file name__
+  
+**● If you are done with sending medias, Click "🔀 Merge Now" to merge
 ● That's it, and rest is mine work...
 
 © By @AVBotz ❤️**
