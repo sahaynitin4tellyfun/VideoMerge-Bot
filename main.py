@@ -479,7 +479,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 reply_markup=InlineKeyboardMarkup(markup)
             )
         except ValueError:
-            await cb.answer("**Your Queue is Empty!**", show_alert=True)
+            await cb.answer("Your Queue is Empty!", show_alert=True)
     elif cb.data.startswith("removeFile_"):
         if (QueueDB.get(cb.from_user.id, None) is not None) or (QueueDB.get(cb.from_user.id) != []):
             QueueDB.get(cb.from_user.id).remove(int(cb.data.split("_", 1)[-1]))
@@ -525,7 +525,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         if (QueueDB.get(cb.from_user.id, None) is None) or (QueueDB.get(cb.from_user.id) == []):
             await cb.answer("Sorry, Your Queue is Empty!", show_alert=True)
             return
-        merged_vid_path = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/[@AVBotz]_Merged.{FormtDB.get(cb.from_user.id).lower()}"
+        merged_vid_path = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/[@AniMesH941]_Merged.{FormtDB.get(cb.from_user.id).lower()}"
         if cb.data.split("_", 1)[-1] == "Yes":
             await cb.message.edit("**Okay, Send me the new file name!**")
             try:
