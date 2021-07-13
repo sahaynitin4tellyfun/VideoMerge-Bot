@@ -526,6 +526,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             await cb.answer("Sorry, Your Queue is Empty!", show_alert=True)
             return
          merged_vid_path = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/[@AVBotz]_Merged.{FormtDB.get(cb.from_user.id).lower()}"
+            
+            
         if cb.data.split("_", 1)[-1] == "Yes":
             await cb.message.edit("**Okay, Send me the new file name!**")
             try:
