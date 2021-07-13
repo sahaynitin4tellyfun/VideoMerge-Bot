@@ -175,7 +175,7 @@ async def videos_handler(bot: Client, m: Message):
                 text=f"**😂😂 Stop it dude,**\n**Only {str(Config.MAX_VIDEOS)} videos are allowed to merge together!**\n\n**So, Click Merge Now Button 😐**",
                 reply_markup=InlineKeyboardMarkup(markup)
             )
-@NubBot.on_message(filters.private & filters.media & ~filters.edited)
+@NubBot.on_message(filters.private & filters.video & filters.gif & ~filters.edited)
 async def video_hand(bot: Client, m: Message):
     await m.reply_text(
         text=f"**I can't identify it's file name... Please Rename it or send videos in file format!**", 
@@ -460,7 +460,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 )
             )
         else:
-            await cb.answer("**😐 No Thumbnail Found for you in Database!**")
+            await cb.answer("😐 No Thumbnail Found for you in Database!")
     elif "deleteThumbnail" in cb.data:
         await db.set_thumbnail(cb.from_user.id, thumbnail=None)
         await cb.message.edit("**✅ Thumbnail Deleted Successfully from Database!**")
