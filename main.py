@@ -282,7 +282,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                     text=f"**Downloading {media.file_name}...**"
                 )
             except MessageNotModified:
-                QueueDB.gbet(cb.from_user.id).remove(i.message_id)
+                QueueDB.get(cb.from_user.id).remove(i.message_id)
                 await cb.message.edit("**Skipped the File!**")
                 await asyncio.sleep(3)
                 continue
