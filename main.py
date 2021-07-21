@@ -370,8 +370,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             media = i.video or i.document
             try:
                 await cb.message.edit(
-                    text=f"**Downloading ⬇️\n{media.file_name}...**", 
-                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]])
+                    text=f"**Downloading ⬇️\n{media.file_name}...**")
                 )
             except MessageNotModified:
                 QueueDB.get(cb.from_user.id).remove(i.message_id)
