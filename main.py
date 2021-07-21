@@ -279,7 +279,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             media = i.video or i.document
             try:
                 await cb.message.edit(
-                    text=f"**Downloading ⬇️\n{media.file_name}...**"
+                    text=f"**Downloading ⬇️\n{media.file_name}...**", 
+                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]])
                 )
             except MessageNotModified:
                 QueueDB.get(cb.from_user.id).remove(i.message_id)
@@ -320,7 +321,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         if (len(vid_list) < 2) and (len(vid_list) > 0):
             await cb.message.edit("**There's only one video in the Queue!**\n**Maybe you sent same video multiple times.**\n\n**Any Issues, Contact us at @AVBotz_Support**")
             return
-        await cb.message.edit("**Trying to Merge Videos...**")
+        await cb.message.edit("**Trying to Merge Videos...**",
+                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]]))
         with open(input_, 'w') as _list:
             _list.write("\n".join(vid_list))
         merged_vid_path = await MergeVideo(
@@ -337,12 +339,13 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             QueueDB.update({cb.from_user.id: []})
             FormtDB.update({cb.from_user.id: None})
             return
-        vid_list = []
-        await cb.message.edit(f"**Successfully Merged the videos! \n\nTotal Videos Merged : {len(vid_list)} 👀**")
+        await cb.message.edit(f"**Successfully Merged the videos! 🥳🥳**", 
+                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]]))
         await asyncio.sleep(Config.TIME_GAP)
         file_size = os.path.getsize(merged_vid_path)
         if int(file_size) > 2097152000:
-            await cb.message.edit(f"**Sorry Sir,**\n**Merged File Size became {humanbytes(file_size)}!!**\n**But, I can't upload such big files on Telegram due to Telegram Limitations 🙃**\n\n**So, Uploading Your Video to Streamtape...😋**")
+            await cb.message.edit(f"**Sorry Sir,**\n**Merged File Size became {humanbytes(file_size)}!!**\n**But, I can't upload such big files on Telegram due to Telegram Limitations 🙃**\n\n**So, Uploading Your Video to Streamtape...😋**",
+                                  reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]]))
             await UploadToStreamtape(file=merged_vid_path, editable=cb.message, file_size=file_size)
             await delete_all(root=f"{Config.DOWN_PATH}/{cb.from_user.id}/")
             QueueDB.update({cb.from_user.id: []})
@@ -534,7 +537,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 if ask_.text:
                     ascii_ = e = ''.join([i if (i in string.digits or i in string.ascii_letters or i == " ") else "" for i in ask_.text])
                     new_file_name = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/{ascii_.replace(' ', ' ').rsplit('.', 1)[0]}.{FormtDB.get(cb.from_user.id).lower()}"
-                    await cb.message.edit(f"**Renaming your file to** `{new_file_name.rsplit('/', 1)[-1]}`")
+                    await cb.message.edit(f"**Renaming your file to** `{new_file_name.rsplit('/', 1)[-1]}`",
+                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]]))
                     os.rename(merged_vid_path, new_file_name)
                     await asyncio.sleep(2)
                     merged_vid_path = new_file_name
@@ -543,7 +547,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 await asyncio.sleep(Config.TIME_GAP)
             except:
                 pass
-        await cb.message.edit("**Extracting Video Data...**")
+        await cb.message.edit("**Extracting Video Data...**", 
+                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]]))
         duration = 1
         width = 100
         height = 100
