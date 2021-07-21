@@ -279,7 +279,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             media = i.video or i.document
             try:
                 await cb.message.edit(
-                    text=f"**Downloading {media.file_name}...**"
+                    text=f"**Downloading ⬇️\n{media.file_name}...**"
                 )
             except MessageNotModified:
                 QueueDB.get(cb.from_user.id).remove(i.message_id)
@@ -302,7 +302,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             except Exception as downloadErr:
                 print(f"**😐 Failed to Download the Given File!**\n**Error: {downloadErr}**\n\n**Contact My Support Group - @AVBotz_Support**")
                 QueueDB.get(cb.from_user.id).remove(i.message_id)
-                await cb.message.edit("File Skipped!")
+                await cb.message.edit("**File Skipped!**")
                 await asyncio.sleep(3)
                 continue
             metadata = extractMetadata(createParser(file_dl_path))
@@ -337,7 +337,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             QueueDB.update({cb.from_user.id: []})
             FormtDB.update({cb.from_user.id: None})
             return
-        await cb.message.edit("**Successfully Merged the videos!**")
+        vid_list = list(set(vid_list))
+        await cb.message.edit(f"**Successfully Merged the videos! \n\nTotal Videos Merged : {vid_list} 👀**")
         await asyncio.sleep(Config.TIME_GAP)
         file_size = os.path.getsize(merged_vid_path)
         if int(file_size) > 2097152000:
@@ -532,7 +533,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 ask_: Message = await bot.listen(cb.message.chat.id, timeout=300)
                 if ask_.text:
                     ascii_ = e = ''.join([i if (i in string.digits or i in string.ascii_letters or i == " ") else "" for i in ask_.text])
-                    new_file_name = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/{ascii_.replace(' ', '_').rsplit('.', 1)[0]}.{FormtDB.get(cb.from_user.id).lower()}"
+                    new_file_name = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/{ascii_.replace(' ', ' ').rsplit('.', 1)[0]}.{FormtDB.get(cb.from_user.id).lower()}"
                     await cb.message.edit(f"**Renaming your file to** `{new_file_name.rsplit('/', 1)[-1]}`")
                     os.rename(merged_vid_path, new_file_name)
                     await asyncio.sleep(2)
