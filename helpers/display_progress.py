@@ -1,7 +1,7 @@
 import math
 import time
 from configs import Config
-
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 async def progress_for_pyrogram(current, total, ud_type, message, start):
     now = time.time()
@@ -34,6 +34,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
                     ud_type,
                     tmp
                 ),
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]]))
                 parse_mode='markdown'
             )
         except:
