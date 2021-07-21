@@ -337,7 +337,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             QueueDB.update({cb.from_user.id: []})
             FormtDB.update({cb.from_user.id: None})
             return
-        vid_list = list(set(vid_list))
+        vid_list = list()
         await cb.message.edit(f"**Successfully Merged the videos! \n\nTotal Videos Merged : {vid_list} 👀**")
         await asyncio.sleep(Config.TIME_GAP)
         file_size = os.path.getsize(merged_vid_path)
