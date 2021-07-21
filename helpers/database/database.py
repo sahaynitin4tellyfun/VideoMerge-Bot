@@ -19,7 +19,7 @@ class Database:
                 is_banned=False,
                 ban_duration=0,
                 banned_on=datetime.date.max.isoformat(),
-                ban_reason=''
+                ban_reason=''),
             upload_as_doc=False,
             thumbnail=None,
             generate_ss=False,
