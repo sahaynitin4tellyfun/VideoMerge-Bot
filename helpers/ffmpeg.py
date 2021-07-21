@@ -34,7 +34,8 @@ async def MergeVideo(input_file: str, user_id: int, message: Message, format_: s
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
-    await message.edit("**Merging Your Video Now...**\n\n**Please Keep Patience...**")
+    await message.edit("**Merging Your Video Now...**\n\n**Please Keep Patience...**",
+                       reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]]))
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
