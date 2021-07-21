@@ -11,7 +11,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 
 async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, width, height, duration, video_thumbnail, file_size):
     try:
-        vid_list = list() 
+        vid_list = int(vid_list)
         sent_ = None
         if (await db.get_upload_as_doc(cb.from_user.id)) is False:
             c_time = time.time()
@@ -22,7 +22,7 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
                 height=height,
                 duration=duration,
                 thumb=video_thumbnail,
-                caption=(f"**👀 {merged_vid_path.rsplit('/', 1)[-1]}\nTotal Videos Merged : {len(vid_list)}**\n\n{Config.CAPTION}"),
+                caption=(f"**👀 {merged_vid_path.rsplit('/', 1)[-1]}\nTotal Videos Merged : {vid_list}**\n\n{Config.CAPTION}"),
                 progress=progress_for_pyrogram,
                 progress_args=(
                     "**📤 Uploading as Video...**",
@@ -41,7 +41,7 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
             sent_ = await bot.send_document(
                 chat_id=cb.message.chat.id,
                 document=merged_vid_path,
-                caption=(f"**👀 {merged_vid_path.rsplit('/', 1)[-1]}\nTotal Videos Merged : {len(vid_list)}**\n\n{Config.CAPTION}"),
+                caption=(f"**👀 {merged_vid_path.rsplit('/', 1)[-1]}\nTotal Videos Merged : {vid_list}**\n\n{Config.CAPTION}"),
                 thumb=video_thumbnail,
                 progress=progress_for_pyrogram,
                 progress_args=(
