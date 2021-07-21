@@ -22,7 +22,7 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
                 height=height,
                 duration=duration,
                 thumb=video_thumbnail,
-                caption=(f"**👀 {merged_vid_path.rsplit('/', 1)[-1]}\nTotal Videos Merged : {vid_list}**\n\n{Config.CAPTION}"),
+                caption=(f"**👀 {merged_vid_path.rsplit('/', 1)[-1]}\nTotal Videos Merged : {len(vid_list)}**\n\n{Config.CAPTION}"),
                 progress=progress_for_pyrogram,
                 progress_args=(
                     "**📤 Uploading as Video...**",
@@ -41,7 +41,7 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
             sent_ = await bot.send_document(
                 chat_id=cb.message.chat.id,
                 document=merged_vid_path,
-                caption=(f"**👀 {merged_vid_path.rsplit('/', 1)[-1]}\nTotal Videos Merged : {vid_list}**\n\n{Config.CAPTION}"),
+                caption=(f"**👀 {merged_vid_path.rsplit('/', 1)[-1]}\nTotal Videos Merged : {len(vid_list)}**\n\n{Config.CAPTION}"),
                 thumb=video_thumbnail,
                 progress=progress_for_pyrogram,
                 progress_args=(
