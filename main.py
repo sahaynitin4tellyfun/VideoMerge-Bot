@@ -371,7 +371,6 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             try:
                 await cb.message.edit(
                     text=f"**Downloading ⬇️\n{media.file_name}...**")
-                )
             except MessageNotModified:
                 QueueDB.get(cb.from_user.id).remove(i.message_id)
                 await cb.message.edit("**Skipped the File!**")
