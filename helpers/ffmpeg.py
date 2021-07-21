@@ -4,7 +4,7 @@ import asyncio
 import os
 import time
 from configs import Config
-from pyrogram.types import Message
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
 async def MergeVideo(input_file: str, user_id: int, message: Message, format_: str):
     """
