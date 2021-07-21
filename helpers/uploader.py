@@ -37,7 +37,7 @@ async def UploadVideo(bot: Client, cb: CallbackQuery, merged_vid_path: str, widt
             )
         else:
             c_time = time.time()
-            vid_list = list()
+            vid_list = int(vid_list)
             sent_ = await bot.send_document(
                 chat_id=cb.message.chat.id,
                 document=merged_vid_path,
