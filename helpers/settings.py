@@ -9,7 +9,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 async def OpenSettings(m: Message, user_id: int):
     try:
         await m.edit(
-            text="**__⚙ Configure my Behavior from here, to experience the best service 😉\n\n© @AVBotz ❤️__**",
+            text="**__⚙ Configure my Behavior from here, to experience the best service 😉\n\n© @Tellybots ❤️__**",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [InlineKeyboardButton(f"📤 Upload as {'Video' if (await db.get_upload_as_doc(id=user_id)) is False else 'Document'} ✅", callback_data="triggerUploadMode")],
@@ -24,6 +24,6 @@ async def OpenSettings(m: Message, user_id: int):
         pass
     except FloodWait as e:
         await asyncio.sleep(e.x)
-        await m.edit("**😑 You Are Spamming Nibba!**")
+        await m.edit("**😑 You Are Spamming Dude!**")
     except Exception as err:
         raise err
