@@ -61,7 +61,7 @@ HELP_BUTTONS = InlineKeyboardMarkup(
 
 ABOUT_BUTTONS = InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("📮 Feedback Dev", url="https://t.me/sahaynitin25")],
+                [InlineKeyboardButton("📮 Feedback Dev", url="https://t.me/dkbotzhelp")],
                 [InlineKeyboardButton("🏡 Home", callback_data="home"),
                  InlineKeyboardButton("⛔ Close", callback_data="close")]
             ]
@@ -133,7 +133,7 @@ async def videos_handler(bot: Client, m: Message):
         return
     media = m.video or m.document
     if media.file_name.rsplit(".", 1)[-1].lower() not in ["mp4", "mkv", "webm"]:
-        await m.reply_text("**Sorry dude, I don't support such video formats!**\n**Send Only MP4, MKV or WEBM.**\n\n**Thank You For Using me - @Tellybots_4u ❤️**", quote=True)
+        await m.reply_text("**Sorry dude, I don't support such video formats!**\n**Send Only MP4, MKV or WEBM.**\n\n**Thank You For Using me - @Dkbotz ❤️**", quote=True)
         return
     if QueueDB.get(m.from_user.id, None) is None:
         FormtDB.update({m.from_user.id: media.file_name.rsplit(".", 1)[-1].lower()})
@@ -160,7 +160,7 @@ async def videos_handler(bot: Client, m: Message):
                 FormtDB.update({m.from_user.id: media.file_name.rsplit(".", 1)[-1].lower()})
             await asyncio.sleep(Config.TIME_GAP)
             if len(QueueDB.get(m.from_user.id)) == Config.MAX_VIDEOS:
-                MessageText = "**Okay, You can merge your videos using the below Merge Now Button!**\n\n**© Made by @Tellybots_4u ❤️**"
+                MessageText = "**Okay, You can merge your videos using the below Merge Now Button!**\n\n**© Made by @Dkbotz ❤️**"
             markup = await MakeButtons(bot, m, QueueDB)
             await editable.edit(text="**Your Videos are Added to Queue!**")
             reply_ = await m.reply_text(
@@ -390,7 +390,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                     )
                 )
             except Exception as downloadErr:
-                print(f"**😐 Failed to Download the Given File!**\n**Error: {downloadErr}**\n\n**Contact My Support Group - @tellybots_support**")
+                print(f"**😐 Failed to Download the Given File!**\n**Error: {downloadErr}**\n\n**Contact My Support Group - @Dk_botz**")
                 QueueDB.get(cb.from_user.id).remove(i.message_id)
                 await cb.message.edit("**File Skipped!**")
                 await asyncio.sleep(3)
@@ -408,7 +408,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 return
         vid_list = list(set(vid_list))
         if (len(vid_list) < 2) and (len(vid_list) > 0):
-            await cb.message.edit("**There's only one video in the Queue!**\n**Maybe you sent same video multiple times.**\n\n**Any Issues, Contact us at @tellybots_support**")
+            await cb.message.edit("**There's only one video in the Queue!**\n**Maybe you sent same video multiple times.**\n\n**Any Issues, Contact us at @dk_botz**")
             return
         await cb.message.edit("**Trying to Merge Videos...**",
                               reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Cancel Process 🗑️", callback_data="cancelProcess")]]))
@@ -446,7 +446,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 [
                     [InlineKeyboardButton("📂 Rename File", callback_data="renameFile_Yes"), 
                      InlineKeyboardButton("😐 Use Default", callback_data="renameFile_No")],
-                    [InlineKeyboardButton("💬 Join My Support Group 👥", url="https://t.me/tellybots_support")]
+                    [InlineKeyboardButton("💬 Join My Support Group 👥", url="https://t.me/dk_botz")]
                 ]
             )
         )
@@ -505,7 +505,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 user = await bot.get_chat_member(chat_id=(int(Config.UPDATES_CHANNEL) if Config.UPDATES_CHANNEL.startswith("-100") else Config.UPDATES_CHANNEL), user_id=cb.message.chat.id)
                 if user.status == "kicked":
                     await cb.message.edit(
-                        text="**Sorry Sir, You are Banned to use me. Contact my [Support Group](https://t.me/tellybots_support).**",
+                        text="**Sorry Sir, You are Banned to use me. Contact my [Support Group](https://t.me/dk_botz).**",
                         parse_mode="markdown",
                         disable_web_page_preview=True
                     )
@@ -528,7 +528,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
                 return
             except Exception:
                 await cb.message.edit(
-                    text="**Something went Wrong Dude. Contact my [Support Group](https://t.me/tellybots_support).**",
+                    text="**Something went Wrong Dude. Contact my [Support Group](https://t.me/dk_botz).**",
                     parse_mode="markdown",
                     disable_web_page_preview=True
                 )
@@ -592,7 +592,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("👀 Other Botz", url="https://t.me/tellybots_4u"),
+                        InlineKeyboardButton("👀 Other Botz", url="https://t.me/dkbotz"),
                         InlineKeyboardButton("😐 Close", callback_data="close")
                     ]
                 ] 
@@ -618,7 +618,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         if (QueueDB.get(cb.from_user.id, None) is None) or (QueueDB.get(cb.from_user.id) == []):
             await cb.answer("Sorry, Your Queue is Empty!", show_alert=True)
             return
-        merged_vid_path = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/[@Tellybots_4u]_Merged.{FormtDB.get(cb.from_user.id).lower()}"
+        merged_vid_path = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}/[@Dkbotz]_Merged.{FormtDB.get(cb.from_user.id).lower()}"
         if cb.data.split("_", 1)[-1] == "Yes":
             await cb.message.edit("**Okay, Send me the new file name!**")
             try:
@@ -701,7 +701,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             video_thumbnail=video_thumbnail,
             file_size=os.path.getsize(merged_vid_path)
         )
-        caption = f"**__© Uploaded By @Tellybots_4u ❤️__**"
+        caption = f"**__© Uploaded By @Dkbotz ❤️__**"
         if (await db.get_generate_ss(cb.from_user.id)) is True:
             await cb.message.edit("**Now Generating Screenshots...**")
             generate_ss_dir = f"{Config.DOWN_PATH}/{str(cb.from_user.id)}"
