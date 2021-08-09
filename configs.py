@@ -26,7 +26,7 @@ I can Merge Multiple Videos into One Video, Generate ScreenShots, Generate Sampl
 Configure The Settings Before using meh...!
 Check Below Buttons for more..! 
 
-🤖 Developer : [Dkbotzhelp](https://t.me/Dkbotz)**
+🤖 Developer : [Dkbotzhelp](https://t.me/Dkbotzhelp)**
 """
     ABOUT_TEXT = """
 **● Developed By : [Dkbotzhelp](https://t.me/dkbotzhelp)
