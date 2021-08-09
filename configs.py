@@ -26,17 +26,17 @@ I can Merge Multiple Videos into One Video, Generate ScreenShots, Generate Sampl
 Configure The Settings Before using meh...!
 Check Below Buttons for more..! 
 
-🤖 Developer : [Tellybots_4u](https://t.me/tellybots_4u)**
+🤖 Developer : [Dkbotzhelp](https://t.me/Dkbotz)**
 """
     ABOUT_TEXT = """
-**● Developed By : [Tellybots_4u](https://t.me/tellybots_4u)
-● Updates Channel : [Tellybots_4u](https://t.me/tellybots_4u)
-● Support : [Telly Bots Support](https://t.me/tellybots_support)
+**● Developed By : [Dkbotzhelp](https://t.me/dkbotzhelp)
+● Updates Channel : [Dkbotz](https://t.me/dkbotz)
+● Support : [Dk Botz Support](https://t.me/Dk_botz)
 ● Language : [Python 3](https://www.python.org)
 ● Library : [Pyrogram](https://docs.pyrogram.org)
 ● Server : [Heroku](https://heroku.com)
 
-©️ Made By @Tellybots_4u ❤️**
+©️ Made By @Dkbotz ❤️**
 """
 
     HELP_TEXT = """**Hello {}, It's too easy to use me..**
@@ -51,10 +51,10 @@ Check Below Buttons for more..!
 **● If you are done with sending medias, Click "🔀 Merge Now" to merge
 ● That's it, and rest is mine work...
 
-© By @Tellybots_4u ❤️**
+© By @Dkbotz ❤️**
 """
     
-    CAPTION = "**__© Merged By @Tellybots_4u ❤️__**"
+    CAPTION = "**__© Merged By @Dkbotz ❤️__**"
     PROGRESS = """
 **● Percentage : {0}%**
 **● Done: {1}**
